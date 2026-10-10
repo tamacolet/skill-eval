@@ -96,17 +96,17 @@ test('system-reminder 除去・コマンドの整形・貼り付けの印', asyn
 });
 
 test('使ったskill（Skill・/x・Read）と skillへの書き込み（Edit/Write）を集計する', async () => {
-  const skillFile = '/Users/t/.claude/skills/colorful-video/references/explainer-script.md';
+  const skillFile = '/Users/me/.claude/skills/colorful-video/references/explainer-script.md';
   const s = await parseRows([
     human('u1', '<command-name>/colorful-video</command-name><command-args>作って</command-args>'),
     ai('a1', [toolUse('Skill', { skill: 'youtube-publish' })]),
     ai('a2', [
-      toolUse('Read', { file_path: '/Users/t/.claude/skills/colorful-video/SKILL.md' }),
-      toolUse('Read', { file_path: '/Users/t/.claude/skills/colorful-video/references/x.md' }),
+      toolUse('Read', { file_path: '/Users/me/.claude/skills/colorful-video/SKILL.md' }),
+      toolUse('Read', { file_path: '/Users/me/.claude/skills/colorful-video/references/x.md' }),
     ]),
     ai('a3', [toolUse('Edit', { file_path: skillFile })], T2),
     ai('a4', [toolUse('Write', { file_path: skillFile })], T3),
-    ai('a5', [toolUse('Edit', { file_path: '/Users/t/Documents/memo.md' })]),
+    ai('a5', [toolUse('Edit', { file_path: '/Users/me/Documents/memo.md' })]),
   ]);
   assert.deepEqual(s.skills, [
     { name: 'colorful-video', calls: 1, reads: 2 },

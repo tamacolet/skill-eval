@@ -9,11 +9,11 @@ import { pathToFileURL } from 'node:url';
 
 export const DEFAULT_PROJECTS_ROOT = path.join(os.homedir(), '.claude', 'projects');
 const RULE_RE = /今後も|今後は|次から|これから(?:も|は)|毎回|必ず|常に|覚えておいて|忘れないで|二度と|以後|ルール化|(?:skill|スキル)\s*(?:に|へ)?\s*(?:登録|入れ|いれ|反映|追加|更新)|で統一|に統一/i;
-const ONCE_RE = /今回だけ|今回は|今回のみ|この(?:動画|記事|投稿|ポスト|回)だけ|今だけ|とりあえず|一旦|いったん|(?:時|とき|場合)だけ|に限り|に限って/;
+const ONCE_RE = /今回だけ|今回は|今回のみ|この[^\s、。]{1,8}だけ|今だけ|とりあえず|一旦|いったん|(?:時|とき|場合)だけ|に限り|に限って/;
 const WRITE_TOOLS = ['Edit', 'Write', 'NotebookEdit'];
 const LABEL = { human: '人', peer: '中継', answer: '回答' };
 const STOP_HOOK = 'Stop hook feedback:';
-// auto-reply hook（席を外している時の代理の返事）が必ず入れる句
+// 留守中に代わりに答える仕組みが入れる句（作者の環境のもの。無い環境では0件になる）
 const AUTO_ANSWER = 'ユーザーは席を外しています';
 const USAGE = [
   '使い方:',
